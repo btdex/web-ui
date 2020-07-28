@@ -1,3 +1,19 @@
+<style>
+    * :global(.app-content) {
+        flex: auto;
+        overflow: auto;
+        position: relative;
+        flex-grow: 1;
+    }
+
+    * :global(.mdc-drawer) {
+        /* This is not needed for a page-wide modal. */
+        overflow-y: hidden;
+    }
+
+</style>
+
+
 <Drawer variant="dismissible" bind:open={open}>
     <Header>
         <Title>Super Drawer</Title>

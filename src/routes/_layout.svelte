@@ -1,4 +1,9 @@
 <style>
+	:global(body) {
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+	}
 	main {
 		position: relative;
 		max-width: 56em;
