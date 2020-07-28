@@ -1,9 +1,3 @@
-<script>
-	import Nav from '../components/Nav.svelte';
-
-	export let segment;
-</script>
-
 <style>
 	main {
 		position: relative;
@@ -15,8 +9,19 @@
 	}
 </style>
 
-<Nav {segment}/>
-
-<main>
+<AppBar on:menuClick={toggleMenu}/>
+<Drawer open={isDrawerOpen}>
 	<slot/>
-</main>
+</Drawer>
+
+<script>
+	import AppBar from "../components/AppBar.svelte";
+	import Drawer from "../components/Drawer.svelte";
+
+	export let segment;
+	let isDrawerOpen = false
+
+	function toggleMenu() {
+		isDrawerOpen = !isDrawerOpen
+	}
+</script>
