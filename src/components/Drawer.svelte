@@ -5,14 +5,7 @@
         position: relative;
         flex-grow: 1;
     }
-
-    * :global(.mdc-drawer) {
-        /* This is not needed for a page-wide modal. */
-        overflow-y: hidden;
-    }
-
 </style>
-
 
 <Drawer variant="dismissible" bind:open={open}>
     <Header>
@@ -21,20 +14,17 @@
     </Header>
     <Content>
         <List>
-            <Item href="javascript:void(0)" on:click={() => setActive('Gray Kittens')} activated={active === 'Gray Kittens'}>
-                <Text>Gray Kittens</Text>
+            <Item href="." on:click={setActive(Home)} activated={active === Home}>
+                <Text>Home</Text>
             </Item>
-            <Item href="javascript:void(0)" on:click={() => setActive('A Space Rocket')} activated={active === 'A Space Rocket'}>
-                <Text>A Space Rocket</Text>
+            <Item href="." on:click={setActive(Trades)} activated={active === Trades}>
+                <Text>Trades</Text>
             </Item>
-            <Item href="javascript:void(0)" on:click={() => setActive('100 Pounds of Gravel')} activated={active === '100 Pounds of Gravel'}>
-                <Text>100 Pounds of Gravel</Text>
+            <Item href="." on:click={setActive(Markets)} activated={active === Markets}>
+                <Text>Markets</Text>
             </Item>
-            <Item href="javascript:void(0)" on:click={() => setActive('All of the Shrimp')} activated={active === 'All of the Shrimp'}>
-                <Text>All of the Shrimp</Text>
-            </Item>
-            <Item href="javascript:void(0)" on:click={() => setActive('A Planet with a Mall')} activated={active === 'A Planet with a Mall'}>
-                <Text>A Planet with a Mall</Text>
+            <Item href="about" on:click={setActive(About)} activated={active === About}>
+                <Text>About</Text>
             </Item>
         </List>
     </Content>
@@ -49,11 +39,19 @@
 <script>
     import Drawer, {AppContent, Content, Header, Title, Subtitle, Scrim} from '@smui/drawer'
     import List, {Item, Text, Graphic, Separator, Subheader} from '@smui/list'
+    import {RouteHome,RouteTrades,RouteMarkets, RouteAbout} from "../utils/routes";
 
     export let open = false
     let active
 
+    const About = RouteAbout()
+    const Home = RouteHome()
+    const Markets = RouteMarkets()
+    const Trades = RouteTrades()
+
     function setActive(value) {
+      return () => {
         active = value;
+      }
     }
 </script>
