@@ -17,7 +17,7 @@
             <Item href="." on:click={setActive(Home)} activated={active === Home}>
                 <Text>Home</Text>
             </Item>
-            <Item href="." on:click={setActive(Trades)} activated={active === Trades}>
+            <Item href={Trades} on:click={setActive(Trades)} activated={active === Trades}>
                 <Text>Trades</Text>
             </Item>
             <Item href="." on:click={setActive(Markets)} activated={active === Markets}>

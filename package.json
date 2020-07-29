@@ -2,8 +2,11 @@
   "name": "btdex-webui",
   "description": "A Web Interface for the Btdex Desktop client",
   "keywords": [
+    "cryptocoin",
+    "exchange",
     "blockchain",
     "burstcoin",
+    "dEx",
     "dApp",
     "dWeb",
     "smart contracts",
@@ -30,6 +33,8 @@
   },
   "dependencies": {
     "compression": "^1.7.4",
+    "http-proxy-middleware": "^1.0.5",
+    "lightweight-charts": "^3.1.3",
     "polka": "next",
     "sapper-environment": "^1.0.1",
     "sirv": "^1.0.1"
