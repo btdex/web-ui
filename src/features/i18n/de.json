@@ -1,0 +1,12 @@
+{
+  "trades": {
+    "tableHeader": {
+      "action": "Aktion",
+      "date": "Datum",
+      "quantity": "Menge",
+      "price": "Preis",
+      "total": "Gesamt",
+      "transaction": "Transaktion"
+    }
+  }
+}

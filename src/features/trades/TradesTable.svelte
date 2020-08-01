@@ -1,30 +1,32 @@
 <script>
     import DataTable, {Head, Body, Row, Cell} from '@smui/data-table';
+    import { _ } from 'svelte-i18n'
+
+    export let trades = []
+
 </script>
 
 <DataTable table$aria-label="Trades">
     <Head>
         <Row>
-            <Cell>Name</Cell>
-            <Cell>Description</Cell>
+            <Cell>{$_('trades.tableHeader.date', { default: 'Date' })}</Cell>
+            <Cell>Action</Cell>
+            <Cell>Price</Cell>
             <Cell>Quantity</Cell>
+            <Cell>Total</Cell>
+            <Cell>Transaction</Cell>
         </Row>
     </Head>
     <Body>
-    <Row>
-        <Cell>Reds</Cell>
-        <Cell>The red ones</Cell>
-        <Cell numeric>45</Cell>
-    </Row>
-    <Row>
-        <Cell>Blues</Cell>
-        <Cell>The blue ones</Cell>
-        <Cell numeric>37</Cell>
-    </Row>
-    <Row>
-        <Cell>Yellows</Cell>
-        <Cell>The yellow ones</Cell>
-        <Cell numeric>32</Cell>
-    </Row>
+    {#each trades as trade}
+        <Row>
+            <Cell>{trade.timestamp}</Cell>
+            <Cell>{trade.type}</Cell>
+            <Cell>{trade.price}</Cell>
+            <Cell>{trade.base_volume}</Cell>
+            <Cell>{trade.quote_volume}</Cell>
+            <Cell>{trade.trade_id}</Cell>
+        </Row>
+    {/each}
     </Body>
 </DataTable>

@@ -22,7 +22,7 @@
 </script>
 
 <Page>
-	<TradesTable/>
+	<TradesTable trades={currentTrades}/>
 </Page>
 
 

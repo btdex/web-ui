@@ -1,26 +1,35 @@
-<script>
-	import LeftSideMenu from "../components/LeftSideMenu.svelte";
-	import AppBar from "../components/AppBar.svelte";
+<script context="module">
+    import {isLoading, waitLocale} from 'svelte-i18n';
 
-	export let segment;
-	let isMenuOpen = false
-
-	function toggleMenu() {
-		isMenuOpen = !isMenuOpen
-	}
+    export async function preload() {
+        return waitLocale();
+    }
 </script>
 
+<script>
+    import LeftSideMenu from "../components/LeftSideMenu.svelte";
+    import AppBar from "../components/AppBar.svelte";
 
-<AppBar on:menuClick={toggleMenu}/>
-<LeftSideMenu open={isMenuOpen}>
-	<slot/>
-</LeftSideMenu>
+    export let segment;
+    let isMenuOpen = false
+
+    function toggleMenu() {
+        isMenuOpen = !isMenuOpen
+    }
+</script>
+
+{#if !$isLoading}
+    <AppBar on:menuClick={toggleMenu}/>
+    <LeftSideMenu open={isMenuOpen}>
+        <slot/>
+    </LeftSideMenu>
+{/if}
 
 <style>
-	:global(body) {
-		margin: 0;
-		padding: 0;
-		overflow: hidden;
-	}
+    :global(body) {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
 </style>
 
