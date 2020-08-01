@@ -4,6 +4,8 @@
     import Page from "../../components/Page.svelte";
     import TradesTable from "./TradesTable.svelte";
     import {getTrades} from "./TradesService";
+    import CandleStickDiagram from "./CandleStickDiagram.svelte";
+    import {mapToCandleStickData} from "./mapToCandleStickData";
 
 
     const AvailablePairs = [
@@ -18,12 +20,14 @@
     ]
 
     let currentTrades = []
+    let candleStickData = []
     let selectedCoin = AvailablePairs[0].label
 
     $: {
         const selected = AvailablePairs.find(({label}) => label === selectedCoin)
         getTrades(selected.slug).then(trades => {
             currentTrades = trades
+            candleStickData = mapToCandleStickData(trades)
         }).catch(() => {
             currentTrades = []
         })
@@ -42,6 +46,9 @@
                 <Option value={pair.label} selected={selectedCoin === pair.label}>{pair.label}</Option>
             {/each}
         </Select>
+    </div>
+    <div class="candlestick-container">
+        <CandleStickDiagram trades={candleStickData} />
     </div>
     <div class="table-container">
         <TradesTable trades={currentTrades}/>
