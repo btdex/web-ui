@@ -1,4 +1,4 @@
-import {isClientSide} from "../utils/isClientSide";
+import {isClientSide} from "../../utils/isClientSide";
 
 const BaseUrl = 'http://localhost:3001/api'
 

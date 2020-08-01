@@ -8,12 +8,15 @@
     }
   },
   "trades": {
+    "select": {
+      "label": "Wähle ein Coin/Token"
+    },
     "tableHeader": {
       "action": "Aktion",
       "date": "Datum",
       "quantity": "Menge",
-      "price": "Preis",
-      "total": "Gesamt",
+      "price": "Preis Ƀ",
+      "total": "Gesamt Ƀ",
       "transaction": "Transaktion"
     },
     "type": {
