@@ -17,8 +17,8 @@ const INIT_OPTIONS = {
 
 let currentLocale = null;
 
-register('en', () => import('./en.json'));
-register('de', () => import('./de.json'));
+register('en', () => import('../messages/en.json'));
+register('de', () => import('../messages/de.json'));
 
 $locale.subscribe((value) => {
   if (value == null) return;
