@@ -7,12 +7,13 @@
     let chart
     let chartApi
 
-    $: if(chartApi){
-      chartApi.applyOptions({
-          localization: {
-              locale: $locale
-          }
-      })
+    $: if (chartApi) {
+        chartApi.applyOptions({
+                    localization: {
+                        locale: $locale,
+                    }
+                }
+        )
         console.log('applied', $locale)
     }
 
@@ -22,7 +23,7 @@
             height: 380,
             localization: {
                 locale: $locale
-            }
+            },
         });
         let candlestickSeries = chartApi.addCandlestickSeries();
         candlestickSeries.setData([
@@ -40,6 +41,7 @@
             {time: '2018-12-30', open: 106.33, high: 110.20, low: 90.39, close: 98.10},
             {time: '2018-12-31', open: 109.87, high: 114.69, low: 85.66, close: 111.26},
         ])
+        chartApi.timeScale().fitContent();
     }
 </script>
 
@@ -48,7 +50,7 @@
 </section>
 
 <style>
-    .candlestick-container{
+    .candlestick-container {
         display: flex;
         justify-content: center;
     }

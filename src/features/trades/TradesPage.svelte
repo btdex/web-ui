@@ -58,8 +58,14 @@
 <style>
     .select-container {
         width: 50%;
-        margin: 0 auto 1rem;
+        margin: 0 auto;
+        margin-bottom: 1rem;
     }
+
+    .candlestick-container {
+        margin-bottom: 1rem;
+    }
+
     .table-container {
         width: 100%;
         display: flex;

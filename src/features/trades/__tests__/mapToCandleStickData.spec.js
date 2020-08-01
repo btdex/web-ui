@@ -111,18 +111,11 @@ describe('mapToCandleStickData', () => {
   it('should map raw trades correctly to candle data ', () => {
     const ExpectedData = [
       {
-        time: '2020-08-01',
-        open: 1.55,
-        high: 1.58,
-        low: 1.55,
-        close: 1.58,
-      },
-      {
-        time: '2020-07-31',
-        open: 1.55,
-        high: 1.55,
-        low: 1.55,
-        close: 1.55,
+        time: '2020-07-26',
+        open: 1.4,
+        high: 1.4,
+        low: 1.38,
+        close: 1.38,
       },
       {
         time: '2020-07-29',
@@ -132,12 +125,19 @@ describe('mapToCandleStickData', () => {
         close: 1.38,
       },
       {
-        time: '2020-07-26',
-        open: 1.4,
-        high: 1.4,
-        low: 1.38,
-        close: 1.38,
-      }
+        time: '2020-07-31',
+        open: 1.55,
+        high: 1.55,
+        low: 1.55,
+        close: 1.55,
+      },
+      {
+        time: '2020-08-01',
+        open: 1.55,
+        high: 1.58,
+        low: 1.55,
+        close: 1.58,
+      },
     ]
 
     expect(mapToCandleStickData(TestData)).toEqual(ExpectedData)

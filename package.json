@@ -36,6 +36,8 @@
   "dependencies": {
     "compression": "^1.7.4",
     "http-proxy-middleware": "^1.0.5",
+    "lodash.groupby": "^4.6.0",
+    "lodash.sortby": "^4.7.0",
     "polka": "next",
     "sapper-environment": "^1.0.1",
     "sirv": "^1.0.1",
