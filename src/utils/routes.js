@@ -10,3 +10,6 @@ export const RouteAbout = () => '/about'
 export const RouteTrades = () => '/trades'
 export const RouteMarkets = () => '/markets'
 
+
+const explorerHost = 'https://burstscan.net'
+export const RouteExplorerTransaction = txId => `${explorerHost}/tx/${txId}`
