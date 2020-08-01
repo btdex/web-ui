@@ -1,23 +1,31 @@
 <script>
-    import Select, {Option} from '@smui/select';
-    import {t} from 'svelte-i18n'
+    import {t} from "svelte-i18n"
+    import Select, {Option} from "@smui/select"
     import Page from "../../components/Page.svelte";
     import TradesTable from "./TradesTable.svelte";
     import {getTrades} from "./TradesService";
 
 
-    const AvailablePairs = [{
-        label: 'DOGE',
-        slug: 'DOGE_BURST'
-    }]
+    const AvailablePairs = [
+        {
+            label: 'DOGE',
+            slug: 'DOGE_BURST'
+        },
+        {
+            label: 'TRT',
+            slug: 'TRT_BURST'
+        }
+    ]
 
-    let selectedPair;
     let currentTrades = []
+    let selectedCoin = AvailablePairs[0].label
 
     $: {
-        selectedPair = AvailablePairs[0]
-        getTrades(selectedPair.slug).then(trades => {
+        const selected = AvailablePairs.find(({label}) => label === selectedCoin)
+        getTrades(selected.slug).then(trades => {
             currentTrades = trades
+        }).catch(() => {
+            currentTrades = []
         })
     }
 
@@ -26,12 +34,12 @@
 <Page>
     <div class="select-container">
         <Select enhanced
-                bind:value={selectedPair.label}
+                bind:value={selectedCoin}
                 label={$t('trades.select.label')}
                 style="width: 100%"
         >
             {#each AvailablePairs as pair}
-                <Option value={pair.label} selected={selectedPair.label === pair.label}>{pair.label}</Option>
+                <Option value={pair.label} selected={selectedCoin === pair.label}>{pair.label}</Option>
             {/each}
         </Select>
     </div>
@@ -40,8 +48,7 @@
 
 <style>
     .select-container {
-        margin: 0 auto;
         width: 50%;
-        margin-bottom: 1rem;
+        margin: 0 auto 1rem;
     }
 </style>
