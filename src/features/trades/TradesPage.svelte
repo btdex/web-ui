@@ -43,12 +43,19 @@
             {/each}
         </Select>
     </div>
-    <TradesTable trades={currentTrades}/>
+    <div class="table-container">
+        <TradesTable trades={currentTrades}/>
+    </div>
 </Page>
 
 <style>
     .select-container {
         width: 50%;
         margin: 0 auto 1rem;
+    }
+    .table-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
     }
 </style>
