@@ -1,6 +1,3 @@
-<script>
-</script>
-
 <section class="page">
     <slot/>
 </section>

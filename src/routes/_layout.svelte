@@ -19,10 +19,12 @@
 </script>
 
 {#if !$isLoading}
-    <AppBar on:menuClick={toggleMenu}/>
-    <LeftSideMenu open={isMenuOpen}>
-        <slot/>
-    </LeftSideMenu>
+    <div>
+        <AppBar on:menuClick={toggleMenu}/>
+        <LeftSideMenu open={isMenuOpen}>
+            <slot/>
+        </LeftSideMenu>
+    </div>
 {/if}
 
 <style>

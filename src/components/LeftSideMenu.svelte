@@ -30,16 +30,16 @@
     </Content>
 </Drawer>
 
-<AppContent class="app-content">
-    <main class="main-content">
+<main class="main-content">
+    <AppContent class="app-content">
         <slot/>
-    </main>
-</AppContent>
+    </AppContent>
+</main>
 
 <script>
     import Drawer, {AppContent, Content, Header, Title, Subtitle, Scrim} from '@smui/drawer'
     import List, {Item, Text, Graphic, Separator, Subheader} from '@smui/list'
-    import {RouteHome,RouteTrades,RouteMarkets, RouteAbout} from "../utils/routes";
+    import {RouteHome, RouteTrades, RouteMarkets, RouteAbout} from "../utils/routes";
 
     export let open = false
     let active
@@ -50,8 +50,8 @@
     const Trades = RouteTrades()
 
     function setActive(value) {
-      return () => {
-        active = value;
-      }
+        return () => {
+            active = value;
+        }
     }
 </script>

@@ -27,7 +27,6 @@
         const selected = AvailablePairs.find(({label}) => label === selectedCoin)
         getTrades(selected.slug).then(trades => {
             currentTrades = trades
-            candleStickData = mapToCandleStickData(trades)
         }).catch(() => {
             currentTrades = []
         })
@@ -48,7 +47,7 @@
         </Select>
     </div>
     <div class="candlestick-container">
-        <CandleStickDiagram trades={candleStickData} />
+        <CandleStickDiagram data={mapToCandleStickData(currentTrades)} />
     </div>
     <div class="table-container">
         <TradesTable trades={currentTrades}/>
