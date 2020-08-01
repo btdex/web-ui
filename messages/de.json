@@ -1,4 +1,12 @@
 {
+  "app": {
+    "selectedLanguage": "\uD83C\uDDE9\uD83C\uDDEA",
+    "languages":{
+      "en": "Englisch",
+      "de" : "Deutsch",
+      "pt-br": "Portugiesisch (BR)"
+    }
+  },
   "trades": {
     "tableHeader": {
       "action": "Aktion",
@@ -7,6 +15,10 @@
       "price": "Preis",
       "total": "Gesamt",
       "transaction": "Transaktion"
+    },
+    "type": {
+      "sell": "Verkauf",
+      "buy": "Ankauf"
     }
   }
 }

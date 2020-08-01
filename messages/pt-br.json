@@ -1,0 +1,24 @@
+{
+  "app": {
+    "selectedLanguage": "\uD83C\uDDE7\uD83C\uDDF7",
+    "languages":{
+      "en": "Inglês",
+      "de" : "Alemão",
+      "pt-br": "Português (BR)"
+    }
+  },
+  "trades" : {
+    "tableHeader": {
+      "action": "Ação",
+      "date": "Data",
+      "quantity": "Quantidade",
+      "price": "Preço",
+      "total": "Total",
+      "transaction": "Transação"
+    },
+    "type": {
+      "sell": "Venda",
+      "buy": "Compra"
+    }
+  }
+}

@@ -5,33 +5,33 @@
 
     export let trades = []
 
+    $: thead = (slug, def) => $_(`trades.tableHeader.${slug}`, {default: def})
 
-    const t = (slug, def) => $_(`trades.tableHeader.${slug}`, {default: def})
-
-    const dateTime = (timestamp) => {
+    $: dateTime = (timestamp) => {
         const d = new Date(timestamp)
         return `${$date(d)} ${$time(d, {format: 'medium'})}`
     }
 
+    $: type = t => $_(`trades.type.${t}`).toUpperCase()
 
 </script>
 
 <DataTable table$aria-label="Trades">
     <Head>
         <Row>
-            <Cell>{t('date', 'Date')}</Cell>
-            <Cell>{t('action', 'Action')}</Cell>
-            <Cell>{t('price', 'Price')}</Cell>
-            <Cell>{t('quantity', 'Quantity')}</Cell>
-            <Cell>{t('total', 'Total')}</Cell>
-            <Cell>{t('transaction', 'Transaction')}</Cell>
+            <Cell>{thead('date', 'Date')}</Cell>
+            <Cell>{thead('action', 'Action')}</Cell>
+            <Cell>{thead('price', 'Price')}</Cell>
+            <Cell>{thead('quantity', 'Quantity')}</Cell>
+            <Cell>{thead('total', 'Total')}</Cell>
+            <Cell>{thead('transaction', 'Transaction')}</Cell>
         </Row>
     </Head>
     <Body>
     {#each trades as trade}
         <Row>
             <Cell>{dateTime(trade.timestamp)}</Cell>
-            <Cell>{trade.type.toUpperCase()}</Cell>
+            <Cell>{type(trade.type)}</Cell>
             <Cell>{$number(trade.price)}</Cell>
             <Cell>{$number(trade.base_volume)}</Cell>
             <Cell>{$number(trade.quote_volume)}</Cell>
