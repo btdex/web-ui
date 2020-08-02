@@ -1,10 +1,12 @@
 <script>
     import DataTable, {Head, Body, Row, Cell} from '@smui/data-table';
-    import {_, time, date, number} from 'svelte-i18n'
+    import {_, time, date, locale} from 'svelte-i18n'
     import {RouteExplorerTransaction} from "../../utils/routes";
 
     export let trades = []
     export let tradingPair = ['','']
+
+    $: formatPrice = new Intl.NumberFormat($locale, {maximumSignificantDigits: 8}).format
 
     $: thead = (slug) => $_(`trades.tableHeader.${slug}`)
     $: dateTime = (timestamp) => {
@@ -34,9 +36,9 @@
         <Row>
             <Cell>{dateTime(trade.timestamp)}</Cell>
             <Cell>{type(trade.type)}</Cell>
-            <Cell>{$number(trade.price)}</Cell>
-            <Cell>{$number(trade.base_volume)}</Cell>
-            <Cell>{$number(trade.quote_volume)}</Cell>
+            <Cell>{formatPrice(trade.price)}</Cell>
+            <Cell>{formatPrice(trade.base_volume)}</Cell>
+            <Cell>{formatPrice(trade.quote_volume)}</Cell>
             <Cell>
                 <a href={RouteExplorerTransaction(pruneTxId(trade.trade_id))}
                    target="_blank"

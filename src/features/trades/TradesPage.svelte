@@ -84,7 +84,10 @@
         <CandleStickDiagram data={candleStickData}/>
     </div>
     <div class="table-container">
-        <TradesTable trades={currentTrades} tradingPair={selectedPair.split('_')} />
+        <TradesTable
+                trades={currentTrades}
+                tradingPair={selectedPair.split('_')}
+        />
     </div>
 </Page>
 
