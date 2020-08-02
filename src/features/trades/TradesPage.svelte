@@ -1,4 +1,5 @@
 <script>
+    import {onDestroy} from 'svelte'
     import {t} from "svelte-i18n"
     import Select, {Option} from "@smui/select"
     import Page from "../../components/Page.svelte";
@@ -6,7 +7,6 @@
     import {getTrades} from "./TradesService";
     import CandleStickDiagram from "./CandleStickDiagram.svelte";
     import {mapToCandleStickData} from "./mapToCandleStickData";
-    import {batchTicksToCandle} from "candlestick-convert";
 
     const AvailablePairs = [
         {
@@ -32,16 +32,39 @@
     ]
 
     let currentTrades = []
+    let candleStickData = []
     let selectedCoin = AvailablePairs[0].label
+    let interval = null
 
-    $: {
-        const selected = AvailablePairs.find(({label}) => label === selectedCoin)
-        getTrades(selected.slug).then(trades => {
+    function fetchTrades(slug) {
+        getTrades(slug).then(trades => {
             currentTrades = trades
         }).catch(() => {
             currentTrades = []
         })
     }
+
+    $: {
+        const {slug} = AvailablePairs.find(({label}) => label === selectedCoin)
+        fetchTrades(slug)
+        clearInterval(interval)
+        interval = setInterval(() => {
+            fetchTrades(slug)
+        }, 5 * 60 * 1000)
+    }
+
+    $: if (currentTrades.length) {
+        candleStickData = mapToCandleStickData(
+                currentTrades.map(t => ({
+                    time: t.timestamp / 1000,
+                    ...t
+                }))
+        );
+    }
+
+    onDestroy(() => {
+        clearInterval(interval)
+    })
 
 </script>
 
@@ -58,7 +81,7 @@
         </Select>
     </div>
     <div class="candlestick-container">
-        <CandleStickDiagram data={ mapToCandleStickData(currentTrades)} />
+        <CandleStickDiagram data={candleStickData}/>
     </div>
     <div class="table-container">
         <TradesTable trades={currentTrades}/>

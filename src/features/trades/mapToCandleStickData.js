@@ -1,30 +1,48 @@
-import groupBy from "lodash.groupby"
-import sortBy from "lodash.sortby"
+export function mapToCandleStickData(tradedata, intervalMins = 120) {
+  let result = [];
 
-const _ = n => n < 10 ? '0' + n : n;
+  tradedata.sort((a, b) => a.time - b.time);
 
-function toDayte(d) {
-  return `${_(d.getYear() + 1900)}-${_(d.getMonth() + 1)}-${_(d.getDate())}`
-}
+  let open = 0;
+  let high = 0;
+  let close = 0;
+  let low = 0;
+  let volume = 0;
+  let timeOpen = 0;
+  let previousClose = null
 
-export function mapToCandleStickData(trades) {
+  for (let i = 0; i < tradedata.length; i++) {
+    const trade = tradedata[i];
 
-  let groupedByDay =
-    groupBy(
-      sortBy(trades, 'timestamp'), // ascending
-      ({timestamp}) => toDayte(new Date(timestamp))
-    )
-  let lastClose = null
-  return Object.keys(groupedByDay).map(k => {
-    let dayPrices = groupedByDay[k].map(({price}) => price);
-    const open = lastClose || dayPrices[0]
-    lastClose = dayPrices[dayPrices.length - 1]
-    return {
-      time: k,
-      open,
-      high: Math.max(...dayPrices),
-      low: Math.min(...dayPrices),
-      close: lastClose,
+    trade.price = Number(trade.price);
+    trade.quantity = Number(trade.quantity);
+    trade.time = Number(trade.time) - (Number(trade.time) % intervalMins);
+
+    if (i === 0) {
+      timeOpen = trade.time;
+      open = trade.price;
+      low = trade.price;
+      high = trade.price;
+      close = trade.price;
+      volume = trade.quantity;
     }
-  })
+
+    if (timeOpen === trade.time) {
+      low = Math.min(trade.price, low);
+      high = Math.max(trade.price, high);
+      volume += trade.quantity;
+      close = trade.price;
+    } else {
+      result.push({time: timeOpen, open, high, low, close, volume});
+      timeOpen = trade.time;
+      open = previousClose || trade.price;
+      low = trade.price;
+      high = trade.price;
+      close = trade.price;
+      volume = trade.quantity;
+    }
+    previousClose = close
+  }
+
+  return result;
 }
