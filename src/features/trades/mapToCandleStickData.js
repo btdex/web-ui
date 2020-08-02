@@ -15,19 +15,16 @@ export function mapToCandleStickData(trades) {
       ({timestamp}) => toDayte(new Date(timestamp))
     )
   let lastClose = null
-  const result = Object.keys(groupedByDay).map(k => {
+  return Object.keys(groupedByDay).map(k => {
     let dayPrices = groupedByDay[k].map(({price}) => price);
     const open = lastClose || dayPrices[0]
     lastClose = dayPrices[dayPrices.length - 1]
-    const result = {
+    return {
       time: k,
       open,
       high: Math.max(...dayPrices),
       low: Math.min(...dayPrices),
       close: lastClose,
     }
-    return result
   })
-
-  return result
 }
