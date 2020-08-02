@@ -6,21 +6,32 @@
     import {getTrades} from "./TradesService";
     import CandleStickDiagram from "./CandleStickDiagram.svelte";
     import {mapToCandleStickData} from "./mapToCandleStickData";
-
+    import {batchTicksToCandle} from "candlestick-convert";
 
     const AvailablePairs = [
+        {
+            label: 'BTC',
+            slug: 'BTC_BURST'
+        },
         {
             label: 'DOGE',
             slug: 'DOGE_BURST'
         },
         {
+            label: 'ETH',
+            slug: 'ETH_BURST'
+        },
+        {
+            label: 'LTC',
+            slug: 'LTC_BURST'
+        },
+        {
             label: 'TRT',
-            slug: 'TRT_BURST'
-        }
+            slug: 'BURST_TRT'
+        },
     ]
 
     let currentTrades = []
-    let candleStickData = []
     let selectedCoin = AvailablePairs[0].label
 
     $: {
@@ -47,7 +58,7 @@
         </Select>
     </div>
     <div class="candlestick-container">
-        <CandleStickDiagram data={mapToCandleStickData(currentTrades)} />
+        <CandleStickDiagram data={ mapToCandleStickData(currentTrades)} />
     </div>
     <div class="table-container">
         <TradesTable trades={currentTrades}/>

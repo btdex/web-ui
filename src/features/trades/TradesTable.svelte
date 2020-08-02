@@ -14,6 +14,8 @@
 
     $: type = t => $_(`trades.type.${t}`).toUpperCase()
 
+    const pruneTxId = txId => txId.split('_')[0]
+
 </script>
 
 <DataTable table$aria-label="Trades">
@@ -36,11 +38,11 @@
             <Cell>{$number(trade.base_volume)}</Cell>
             <Cell>{$number(trade.quote_volume)}</Cell>
             <Cell>
-                <a href={RouteExplorerTransaction(trade.trade_id)}
+                <a href={RouteExplorerTransaction(pruneTxId(trade.trade_id))}
                    target="_blank"
                    rel="noreferrer noopener"
                 >
-                    {trade.trade_id}
+                    {pruneTxId(trade.trade_id)}
                 </a>
             </Cell>
         </Row>
