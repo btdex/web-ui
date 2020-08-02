@@ -15,8 +15,8 @@
       "action": "Ação",
       "date": "Data",
       "quantity": "Quantidade",
-      "price": "Preço Ƀ",
-      "total": "Total Ƀ",
+      "price": "Preço",
+      "total": "Total",
       "transaction": "Transação"
     },
     "type": {

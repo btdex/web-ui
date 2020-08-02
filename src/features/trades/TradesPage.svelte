@@ -11,7 +11,7 @@
     const AvailablePairs = [
         {
             label: 'BTC',
-            slug: 'BTC_BURST'
+            slug: 'BTC_BURST',
         },
         {
             label: 'DOGE',
@@ -44,12 +44,12 @@
         })
     }
 
+    $: selectedPair = AvailablePairs.find(({label}) => label === selectedCoin).slug || ''
     $: {
-        const {slug} = AvailablePairs.find(({label}) => label === selectedCoin)
-        fetchTrades(slug)
+        fetchTrades(selectedPair)
         clearInterval(interval)
         interval = setInterval(() => {
-            fetchTrades(slug)
+            fetchTrades(selectedPair)
         }, 5 * 60 * 1000)
     }
 
@@ -84,7 +84,7 @@
         <CandleStickDiagram data={candleStickData}/>
     </div>
     <div class="table-container">
-        <TradesTable trades={currentTrades}/>
+        <TradesTable trades={currentTrades} tradingPair={selectedPair.split('_')} />
     </div>
 </Page>
 

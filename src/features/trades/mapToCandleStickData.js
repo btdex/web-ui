@@ -1,4 +1,6 @@
 export function mapToCandleStickData(tradedata, intervalMins = 120) {
+  intervalMins *= 60
+
   let result = [];
 
   tradedata.sort((a, b) => a.time - b.time);

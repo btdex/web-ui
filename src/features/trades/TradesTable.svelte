@@ -4,9 +4,9 @@
     import {RouteExplorerTransaction} from "../../utils/routes";
 
     export let trades = []
+    export let tradingPair = ['','']
 
-    $: thead = (slug, def) => $_(`trades.tableHeader.${slug}`, {default: def})
-
+    $: thead = (slug) => $_(`trades.tableHeader.${slug}`)
     $: dateTime = (timestamp) => {
         const d = new Date(timestamp)
         return `${$date(d)} ${$time(d, {format: 'medium'})}`
@@ -21,12 +21,12 @@
 <DataTable table$aria-label="Trades">
     <Head>
         <Row>
-            <Cell>{thead('date', 'Date')}</Cell>
-            <Cell>{thead('action', 'Action')}</Cell>
-            <Cell>{thead('price', 'Price')}</Cell>
-            <Cell>{thead('quantity', 'Quantity')}</Cell>
-            <Cell>{thead('total', 'Total')}</Cell>
-            <Cell>{thead('transaction', 'Transaction')}</Cell>
+            <Cell>{thead('date')}</Cell>
+            <Cell>{thead('action')}</Cell>
+            <Cell>{`${thead('price')} ${tradingPair[0].toUpperCase()}`}</Cell>
+            <Cell>{`${thead('quantity')} ${tradingPair[1].toUpperCase()}`}</Cell>
+            <Cell>{`${thead('total')} ${tradingPair[0].toUpperCase()}`}</Cell>
+            <Cell>{thead('transaction')}</Cell>
         </Row>
     </Head>
     <Body>
